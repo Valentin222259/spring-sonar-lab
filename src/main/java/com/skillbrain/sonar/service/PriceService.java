@@ -9,6 +9,12 @@ import java.util.List;
 @Service
 public class PriceService {
 
+    // --- 🚨 COD INTRODUS INTENȚIONAT PENTRU A PICA QUALITY GATE 🚨 ---
+    // Sonar va detecta "Unused private field" și "Unused private method"
+    private String debugNote() { return "temporary-debug"; }
+    private String unusedToken = "12345";
+    // ------------------------------------------------------------------
+
     public BigDecimal total(List<BigDecimal> values) {
         if (values == null || values.isEmpty()) {
             return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
@@ -22,9 +28,6 @@ public class PriceService {
         }
         return result.setScale(2, RoundingMode.HALF_UP);
     }
-
-    private String debugNote() { return "temporary-debug"; }
-    private String unusedToken = "12345";
 
     public BigDecimal addVat(BigDecimal amount, int vatPercent) {
         if (amount == null || vatPercent < 0) {
