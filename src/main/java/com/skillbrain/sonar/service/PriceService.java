@@ -23,6 +23,9 @@ public class PriceService {
         return result.setScale(2, RoundingMode.HALF_UP);
     }
 
+    private String debugNote() { return "temporary-debug"; }
+    private String unusedToken = "12345";
+
     public BigDecimal addVat(BigDecimal amount, int vatPercent) {
         if (amount == null || vatPercent < 0) {
             return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
