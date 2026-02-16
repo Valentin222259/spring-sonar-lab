@@ -8,8 +8,7 @@ import java.util.List;
 
 @Service
 public class PriceService {
-    private String debugNote() { return "temporary-debug"; }
-    private String unusedToken = "12345";
+
     public BigDecimal total(List<BigDecimal> values) {
         if (values == null || values.isEmpty()) {
             return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
@@ -23,6 +22,24 @@ public class PriceService {
         }
         return result.setScale(2, RoundingMode.HALF_UP);
     }
+
+    // --- 🚨 DUPLICARE INTENȚIONATĂ PENTRU SONAR 🚨 ---
+    // Această metodă face exact același lucru. Java va compila OK,
+    // dar Sonar va țipa că avem "Duplicated Code".
+    public BigDecimal totalDuplicate(List<BigDecimal> values) {
+        if (values == null || values.isEmpty()) {
+            return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+        }
+
+        BigDecimal result = BigDecimal.ZERO;
+        for (BigDecimal value : values) {
+            if (value != null) {
+                result = result.add(value);
+            }
+        }
+        return result.setScale(2, RoundingMode.HALF_UP);
+    }
+    // ----------------------------------------------------
 
     public BigDecimal addVat(BigDecimal amount, int vatPercent) {
         if (amount == null || vatPercent < 0) {
